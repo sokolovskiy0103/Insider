@@ -1,0 +1,59 @@
+name: Build APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.14.3
+
+      - name: Unit tests and release APK
+        run: |
+          set -o pipefail
+          gradle --no-daemon --console=plain :app:testReleaseUnitTest :app:assembleRelease 2>&1 | tee build.log
+
+      # Surface compiler/test errors as annotations so they are readable through the API.
+      - name: Report errors
+        if: failure()
+        run: |
+          {
+            grep -E "^e: |error:|FAILED|What went wrong|> |Caused by|expected:|Exception" build.log | head -60
+            for f in app/build/test-results/*/*.xml; do grep -A3 "<failure" "$f" 2>/dev/null | head -15; done
+          } > errors.txt || true
+          msg=$(sed 's/%/%25/g' errors.txt | awk '{printf "%s%%0A", $0}')
+          echo "::error title=Build errors::${msg}"
+
+      - name: Rename APK
+        run: cp app/build/outputs/apk/release/app-release.apk Insider.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Insider-apk
+          path: Insider.apk
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.${{ github.run_number }}
+          name: Інсайдер v1.0.${{ github.run_number }}
+          body: |
+            Збірка з коміту ${{ github.sha }}.
+            Завантаж Insider.apk на телефон хоста й встанови поверх попередньої версії.
+          files: Insider.apk
+          make_latest: true

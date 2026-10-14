@@ -1,0 +1,128 @@
+:root {
+  --bg: #0e1320;
+  --bg2: #161d2e;
+  --card: #1c2539;
+  --line: #2c3854;
+  --text: #f3efe6;
+  --muted: #9aa6c0;
+  --amber: #f5b942;
+  --amber2: #ffd98a;
+  --red: #ff5d6c;
+  --teal: #46d6b0;
+  --violet: #a98bff;
+  --radius: 18px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; background: var(--bg); color: var(--text); }
+body {
+  font: 16px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+  padding: 12px 16px 40px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+h1, h2, h3 { margin: 0 0 8px; line-height: 1.15; }
+h1 { font-size: 28px; letter-spacing: -0.5px; }
+h2 { font-size: 20px; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+.center { text-align: center; }
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.grow { flex: 1; }
+.stack > * + * { margin-top: 14px; }
+
+.top { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+.logo { font-weight: 800; font-size: 20px; display: flex; align-items: center; gap: 8px; letter-spacing: .3px; }
+.eye { width: 28px; height: 28px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); display: inline-block; }
+.dot.off { background: var(--red); }
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.card.flat { background: var(--bg2); }
+.menu { margin-bottom: 14px; display: grid; gap: 8px; }
+
+.tag {
+  display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 999px;
+  background: var(--bg2); color: var(--muted); text-transform: uppercase; letter-spacing: .5px;
+}
+
+button {
+  font: inherit; font-weight: 700; border: 0; border-radius: 14px; padding: 14px 18px;
+  background: var(--amber); color: #1a1408; cursor: pointer; min-height: 48px;
+}
+button:disabled { opacity: .4; }
+button.ghost { background: transparent; border: 1px solid var(--line); color: var(--text); }
+button.soft { background: var(--bg2); color: var(--text); border: 1px solid var(--line); }
+button.big { width: 100%; font-size: 18px; padding: 16px; }
+button.mini { white-space: nowrap; min-height: 32px; padding: 4px 10px; font-size: 13px; border-radius: 10px; }
+button.danger { background: #6e2430; color: #fff; }
+button.yes { background: var(--red); color: #fff; }
+button.no { background: var(--teal); color: #08261d; }
+button.pick { background: var(--bg2); color: var(--text); border: 2px solid var(--line); text-align: left; }
+button.pick.on { border-color: var(--amber); background: #3a2d10; }
+
+input[type=text] {
+  font: inherit; font-size: 18px; width: 100%; padding: 14px 16px; border-radius: 14px;
+  border: 2px solid var(--line); background: var(--bg2); color: var(--text); outline: none;
+}
+input[type=text]:focus { border-color: var(--amber); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  padding: 8px 12px; border-radius: 999px; background: var(--bg2); border: 1px solid var(--line);
+  font-size: 15px; display: inline-flex; gap: 6px; align-items: center; color: var(--text); font-weight: 600;
+  min-height: 0;
+}
+.chip.on { background: var(--amber); border-color: var(--amber); color: #1a1408; }
+.chip.ok { border-color: var(--teal); }
+
+.qr { background: #fff; border-radius: 16px; padding: 10px; width: min(70vw, 260px); margin: 0 auto; display: block; }
+.url { font-family: ui-monospace, monospace; font-size: 15px; word-break: break-all; }
+
+/* role card */
+.role {
+  border-radius: 24px; padding: 26px 20px; text-align: center; position: relative; overflow: hidden;
+  border: 2px solid var(--line); background: var(--bg2); min-height: 220px;
+  display: flex; flex-direction: column; justify-content: center; gap: 10px; user-select: none;
+}
+.role.MASTER { border-color: var(--violet); background: linear-gradient(160deg, #241d44, #161d2e); }
+.role.INSIDER { border-color: var(--red); background: linear-gradient(160deg, #3a1822, #161d2e); }
+.role.COMMON { border-color: var(--teal); background: linear-gradient(160deg, #123129, #161d2e); }
+.role.hidden { border-style: dashed; border-color: var(--line); background: var(--bg2); }
+.role .name { font-size: 30px; font-weight: 900; letter-spacing: -.5px; }
+.role .what { color: var(--muted); }
+.word { font-size: 34px; font-weight: 900; color: var(--amber); letter-spacing: -.5px; word-break: break-word; }
+.word.small-word { font-size: 22px; }
+.c-MASTER { color: var(--violet); }
+.c-INSIDER { color: var(--red); }
+.c-COMMON { color: var(--teal); }
+
+/* timer */
+.timer { font-variant-numeric: tabular-nums; font-size: 64px; font-weight: 900; text-align: center; letter-spacing: -2px; line-height: 1; }
+.timer.low { color: var(--red); }
+.bar { height: 8px; border-radius: 99px; background: var(--bg2); overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--amber); transition: width .25s linear; }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+.score { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.score:last-child { border-bottom: 0; }
+.score .name { flex: 1; font-weight: 600; }
+.score .pts { font-weight: 800; font-size: 20px; min-width: 2ch; text-align: right; }
+.plus { color: var(--teal); font-weight: 800; font-size: 13px; }
+
+.banner { border-radius: 20px; padding: 20px; text-align: center; }
+.banner h1 { font-size: 26px; }
+.banner.good { background: #12312a; border: 2px solid var(--teal); }
+.banner.bad { background: #3a1822; border: 2px solid var(--red); }
+.banner.meh { background: var(--bg2); border: 2px solid var(--line); }
+.banner .eye { width: 56px; height: 56px; display: block; margin: 0 auto 8px; }
+
+.notice { border-radius: 14px; padding: 12px 14px; background: #3a2d10; border: 1px solid var(--amber); color: var(--amber2); }
+
+.spinner { width: 22px; height: 22px; border: 3px solid var(--line); border-top-color: var(--amber); border-radius: 50%; animation: spin 0.9s linear infinite; display: inline-block; vertical-align: middle; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pop { 0% { transform: scale(.7); opacity: 0 } 70% { transform: scale(1.05) } 100% { transform: scale(1); opacity: 1 } }
+.pop { animation: pop .4s ease-out; }
